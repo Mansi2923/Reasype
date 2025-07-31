@@ -38,8 +38,5 @@ module Reasype
 
     # For Vercel deployment - enable API mode
     config.api_only = false  # Keep false to maintain current functionality
-
-    # Disable Action Cable since it's not being used
-    config.action_cable.disable_request_forgery_protection = true
   end
 end
