@@ -9,9 +9,9 @@ class ApiController < ApplicationController
     # Handle image upload and ingredient analysis
     if params[:image]
       # Process the image and return ingredients
-      ingredients = ["tomato", "onion", "garlic"] # Placeholder
-      render json: { 
-        success: true, 
+      ingredients = [ "tomato", "onion", "garlic" ] # Placeholder
+      render json: {
+        success: true,
         ingredients: ingredients,
         recipes: generate_recipes(ingredients)
       }
@@ -25,9 +25,9 @@ class ApiController < ApplicationController
   def generate_recipes(ingredients)
     # Simple recipe generation logic
     if ingredients.include?("tomato") && ingredients.include?("onion")
-      [{ name: "Tomato Onion Salad", ingredients: ingredients }]
+      [ { name: "Tomato Onion Salad", ingredients: ingredients } ]
     else
-      [{ name: "Mixed Vegetable Dish", ingredients: ingredients }]
+      [ { name: "Mixed Vegetable Dish", ingredients: ingredients } ]
     end
   end
-end 
+end
