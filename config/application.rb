@@ -29,5 +29,8 @@ module Reasype
 
     # Disable Action Cable since it's not being used
     config.action_cable.disable_request_forgery_protection = true
+
+    # Disable database for deployment without PostgreSQL
+    config.active_record.database_tasks = false
   end
 end
