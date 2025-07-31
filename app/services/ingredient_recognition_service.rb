@@ -8,7 +8,25 @@ class IngredientRecognitionService
   
   def analyze
     begin
-      image_annotator = Google::Cloud::Vision.image_annotator
+      # Configure Google Cloud Vision with environment variables
+      vision = Google::Cloud::Vision.new(
+        project_id: ENV['GOOGLE_CLOUD_PROJECT_ID'],
+        credentials: {
+          type: "service_account",
+          project_id: ENV['GOOGLE_CLOUD_PROJECT_ID'],
+          private_key_id: ENV['GOOGLE_CLOUD_PRIVATE_KEY_ID'],
+          private_key: ENV['GOOGLE_CLOUD_PRIVATE_KEY']&.gsub('\n', "\n"),
+          client_email: ENV['GOOGLE_CLOUD_CLIENT_EMAIL'],
+          client_id: ENV['GOOGLE_CLOUD_CLIENT_ID'],
+          auth_uri: "https://accounts.google.com/o/oauth2/auth",
+          token_uri: "https://oauth2.googleapis.com/token",
+          auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+          client_x509_cert_url: ENV['GOOGLE_CLOUD_CLIENT_X509_CERT_URL'],
+          universe_domain: "googleapis.com"
+        }
+      )
+      
+      image_annotator = vision.image_annotator
       
       # Get both label detection and text detection for better results
       label_response = image_annotator.label_detection image: @image_path
