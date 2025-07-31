@@ -1,0 +1,210 @@
+<!-- Beautiful Backdrop Background with Kitchen Images -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-rose-900/40 to-red-900/40"></div>
+    <div class="absolute inset-0 opacity-20">
+        <img src="/IMG_1948.JPG" alt="Kitchen backdrop" class="w-full h-full object-cover">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/35"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="relative z-50 bg-white/15 backdrop-blur-md border-b border-white/30 sticky top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div class="dancing-utensils">
+                        <i class="fas fa-utensils text-white dancing-fork"></i>
+                    </div>
+                </div>
+                <h1 class="text-3xl font-bold text-white drop-shadow-2xl font-cursive">Reasype</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Home</a>
+                <a href="/about" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">About</a>
+                <a href="/contact" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Contact</a>
+                <a href="/recipes" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Recipes</a>
+            </div>
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-white hover:text-pink-200 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+            <a href="/" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Home</a>
+            <a href="/about" class="block py-2 text-white font-medium font-cursive drop-shadow-lg">About</a>
+            <a href="/contact" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Contact</a>
+            <a href="/recipes" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Recipes</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto text-center">
+        <div class="mb-8">
+            <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md rounded-full border border-white/30 mb-8">
+                <i class="fas fa-heart text-pink-300 mr-2"></i>
+                <span class="text-white font-medium font-cursive drop-shadow-lg">Personal Project</span>
+            </div>
+        </div>
+        
+        <h1 class="text-6xl md:text-7xl font-bold text-white mb-8 drop-shadow-2xl leading-tight font-cursive">
+            About
+            <span class="text-white font-cursive drop-shadow-lg">
+                Reasype
+            </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed font-cursive drop-shadow-lg">
+            This is my personal project because I hate cooking but have to because I live alone and often see a food image whose recipe I wanna know. That's about it.
+        </p>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="relative bg-white/10 backdrop-blur-md border-t border-white/30 py-8 mt-20">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p class="text-white/80 font-cursive">
+            Made with ❤️ by Mansi (and some help of AI) for munchers like you
+        </p>
+    </div>
+</footer>
+
+<% content_for :head do %>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    .font-cursive {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    /* Enhanced backdrop blur effects */
+    .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    
+    .backdrop-blur-xl {
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Enhanced shadows for depth */
+    .shadow-2xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Dancing utensils animation */
+    .dancing-utensils {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dancing-fork {
+        animation: dance 2s ease-in-out infinite;
+        transform-origin: center;
+    }
+    
+    @keyframes dance {
+        0%, 100% {
+            transform: rotate(0deg) scale(1);
+        }
+        25% {
+            transform: rotate(-10deg) scale(1.1);
+        }
+        50% {
+            transform: rotate(5deg) scale(1.05);
+        }
+        75% {
+            transform: rotate(-5deg) scale(1.1);
+        }
+    }
+    
+    /* Add a subtle bounce effect */
+    .dancing-utensils:hover .dancing-fork {
+        animation: bounce 0.6s ease-in-out;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        40% {
+            transform: translateY(-5px) scale(1.1);
+        }
+        60% {
+            transform: translateY(-3px) scale(1.05);
+        }
+    }
+    
+    /* Custom animations */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Gradient text animation */
+    .bg-gradient-to-r {
+        background-size: 200% 200%;
+        animation: gradient 3s ease infinite;
+    }
+    
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* Custom opacity classes for backdrop images */
+    .opacity-10 {
+        opacity: 0.1;
+    }
+    
+    .opacity-15 {
+        opacity: 0.15;
+    }
+    
+    .opacity-20 {
+        opacity: 0.2;
+    }
+    
+    .opacity-25 {
+        opacity: 0.25;
+    }
+</style>
+<% end %>
+
+<script>
+console.log("Reasype About page loaded - version 3.0 - MANSI'S PERSONAL STORY")
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu')
+    menu.classList.toggle('hidden')
+}
+
+// Test if everything is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded - Reasype About page ready - MANSI'S PERSONAL STORY")
+})
+</script> 

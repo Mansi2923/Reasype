@@ -1,0 +1,23 @@
+{
+  "buildCommand": "bundle install && bundle exec rails assets:precompile",
+  "outputDirectory": "public",
+  "framework": "ruby",
+  "installCommand": "bundle install",
+  "devCommand": "bundle exec rails server",
+  "builds": [
+    {
+      "src": "public/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+} 

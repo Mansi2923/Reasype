@@ -1,0 +1,1215 @@
+<!-- Beautiful Backdrop Background with Kitchen Image -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <!-- Multiple layered backdrop images with parallax effect -->
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-rose-900/40 to-red-900/40"></div>
+    
+    <!-- Primary backdrop - Kitchen utensils image -->
+    <div class="absolute inset-0 opacity-20">
+        <img src="/IMG_1949.JPG" alt="Kitchen backdrop" class="w-full h-full object-cover">
+    </div>
+    
+    <!-- Overlay gradient for better text readability -->
+    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/35"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="relative z-50 bg-white/15 backdrop-blur-md border-b border-white/30 sticky top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div class="dancing-utensils">
+                        <i class="fas fa-utensils text-white dancing-fork"></i>
+                    </div>
+                </div>
+                <h1 class="text-3xl font-bold text-white drop-shadow-2xl font-cursive">Reasype</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Home</a>
+                <a href="/about" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">About</a>
+                <a href="/contact" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Contact</a>
+                <a href="/recipes" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Recipes</a>
+            </div>
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-white hover:text-pink-200 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+            <a href="/" class="block py-2 text-white font-medium font-cursive drop-shadow-lg">Home</a>
+            <a href="/about" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">About</a>
+            <a href="/contact" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Contact</a>
+            <a href="/recipes" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Recipes</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto text-center">
+        <div class="mb-8">
+            <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md rounded-full border border-white/30 mb-8">
+                <i class="fas fa-star text-yellow-300 mr-2"></i>
+                <span class="text-white font-medium font-cursive drop-shadow-lg">AI-Powered Recipe Generation</span>
+            </div>
+        </div>
+        
+        <h1 class="text-6xl md:text-7xl font-bold text-white mb-8 drop-shadow-2xl leading-tight font-cursive">
+            Transform Your
+            <span class="text-white font-cursive drop-shadow-lg">
+                Ingredients
+            </span>
+            <br>Into Amazing Recipes
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed font-cursive drop-shadow-lg">
+            Upload a photo of your ingredients and watch our AI create personalized, 
+            delicious recipes tailored just for you. From simple snacks to gourmet meals.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-6">
+            <button onclick="scrollToUpload()" class="group bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-10 py-5 rounded-2xl font-semibold text-xl transition-all duration-300 transform hover:scale-105 hover:rotate-1 shadow-2xl hover:shadow-pink-500/25 font-cursive border-2 border-white/20 animate-pulse">
+                <i class="fas fa-camera mr-3 group-hover:rotate-12 transition-transform duration-300"></i>
+                Start Cooking Now
+            </button>
+            <button onclick="showHowItWorks()" class="group border-2 border-white/40 text-white hover:bg-white/20 px-10 py-5 rounded-2xl font-semibold text-xl transition-all duration-300 backdrop-blur-sm font-cursive shadow-2xl hover:scale-105 hover:-rotate-1">
+                <i class="fas fa-play mr-3 group-hover:scale-110 transition-transform duration-300"></i>
+                How It Works
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="relative py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Upload Section -->
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 p-12 mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 font-cursive">Ready to Cook?</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto font-cursive">
+                    Take a photo or upload an image of your ingredients. Our AI will recognize them and create amazing recipes.
+                </p>
+            </div>
+            
+            <div class="text-center">
+                <input type="file" id="imageInput" accept="image/*" class="hidden" 
+                       onchange="handleImageUpload(this)">
+                <label for="imageInput" class="cursor-pointer" 
+                       ondrop="handleDrop(event)" 
+                       ondragover="handleDragOver(event)" 
+                       ondragleave="handleDragLeave(event)">
+                    <div class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-12 py-6 rounded-2xl font-semibold text-xl transition-all duration-300 inline-flex items-center shadow-2xl hover:shadow-3xl transform hover:scale-105 font-cursive border-2 border-white/20 animate-pulse">
+                        <i class="fas fa-cloud-upload-alt mr-4 text-2xl"></i>
+                        Choose Your Image or Drag & Drop
+                    </div>
+                </label>
+                <p class="text-gray-500 mt-4 font-cursive">Supports JPG, PNG, and other image formats</p>
+                <p class="text-pink-500 mt-2 font-cursive text-sm animate-pulse">💡 Try: pav-bhaji.jpg, mashed-potatoes.jpg, or any food image!</p>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loadingDiv" class="hidden mt-12 text-center">
+                <div class="inline-flex items-center px-8 py-6 bg-gradient-to-r from-pink-100 to-rose-100 text-pink-900 rounded-2xl shadow-2xl border border-pink-200/50">
+                    <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600 mr-4"></div>
+                    <span class="font-medium text-lg font-cursive">Analyzing your ingredients...</span>
+                </div>
+            </div>
+            
+            <!-- Image Preview -->
+            <div id="previewDiv" class="mt-12"></div>
+            
+            <!-- Test Buttons -->
+            <div class="text-center space-x-4 mt-8">
+                <button onclick="testJavaScript()" class="bg-gray-600 hover:bg-gray-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    <i class="fas fa-vial mr-3"></i>Test JavaScript
+                </button>
+                <button onclick="testUpload()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    <i class="fas fa-upload mr-3"></i>Test Upload
+                </button>
+            </div>
+            
+            <div id="resultsDiv" class="mt-12"></div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="grid md:grid-cols-3 gap-8 mb-20">
+            <div class="group bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-pink-200/50 text-center hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-pink-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl border-2 border-white/20 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-camera text-white text-3xl drop-shadow-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-900 font-cursive">Smart Recognition</h3>
+                <p class="text-gray-600 text-lg leading-relaxed font-cursive">Our advanced AI identifies ingredients from your photos with incredible accuracy and speed.</p>
+            </div>
+            
+            <div class="group bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-pink-200/50 text-center hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                <div class="w-20 h-20 bg-gradient-to-br from-rose-500 to-rose-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl border-2 border-white/20 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-utensils text-white text-3xl drop-shadow-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-900 font-cursive">Personalized Recipes</h3>
+                <p class="text-gray-600 text-lg leading-relaxed font-cursive">Get customized recipes based on your available ingredients, dietary preferences, and skill level.</p>
+            </div>
+            
+            <div class="group bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl p-8 shadow-2xl border border-pink-200/50 text-center hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2">
+                <div class="w-20 h-20 bg-gradient-to-br from-red-500 to-red-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-2xl border-2 border-white/20 group-hover:scale-110 transition-transform">
+                    <i class="fas fa-clock text-white text-3xl drop-shadow-lg"></i>
+                </div>
+                <h3 class="text-2xl font-bold mb-4 text-gray-900 font-cursive">Quick & Easy</h3>
+                <p class="text-gray-600 text-lg leading-relaxed font-cursive">Generate delicious recipes in seconds, not minutes. Perfect for busy home cooks.</p>
+            </div>
+        </div>
+        
+        <!-- How It Works Section -->
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 p-12 mb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-6 font-cursive">How It Works</h2>
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto font-cursive">
+                    Our AI-powered system makes cooking easier than ever. Just follow these simple steps.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-pink-500 to-pink-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-2xl border-2 border-white/20">1</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 font-cursive">Upload Photo</h3>
+                    <p class="text-gray-600 font-cursive">Take a photo of your ingredients or upload an existing image.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-rose-500 to-rose-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-2xl border-2 border-white/20">2</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 font-cursive">AI Analysis</h3>
+                    <p class="text-gray-600 font-cursive">Our AI recognizes and identifies all ingredients in your photo.</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-gradient-to-br from-red-500 to-red-600 rounded-full flex items-center justify-center mx-auto mb-6 text-white text-2xl font-bold shadow-2xl border-2 border-white/20">3</div>
+                    <h3 class="text-xl font-bold mb-4 text-gray-900 font-cursive">Get Recipes</h3>
+                    <p class="text-gray-600 font-cursive">Receive personalized recipes tailored to your ingredients and preferences.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="relative bg-black/80 backdrop-blur-xl text-white py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                        <div class="dancing-utensils">
+                            <i class="fas fa-utensils text-white dancing-fork"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-2xl font-bold font-cursive">Reasype</h3>
+                </div>
+                <p class="text-gray-300 text-lg leading-relaxed font-cursive">AI-powered recipe optimization for modern cooking enthusiasts.</p>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-6 font-cursive">Features</h4>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Ingredient Recognition</li>
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Recipe Generation</li>
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Dietary Preferences</li>
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Smart Suggestions</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-6 font-cursive">Support</h4>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="font-cursive"><a href="/help" class="hover:text-pink-400 transition-colors duration-200">Help Center</a></li>
+                    <li class="font-cursive"><a href="/contact" class="hover:text-pink-400 transition-colors duration-200">Contact Us</a></li>
+                    <li class="font-cursive"><a href="/privacy" class="hover:text-pink-400 transition-colors duration-200">Privacy Policy</a></li>
+                    <li class="font-cursive"><a href="/terms" class="hover:text-pink-400 transition-colors duration-200">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-6 font-cursive">Connect</h4>
+                <div class="flex space-x-4 mb-6">
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400 font-cursive">Join our community of food lovers</p>
+            </div>
+        </div>
+        
+        <div class="border-t border-white/20 mt-12 pt-8 text-center text-gray-400">
+            <p class="font-cursive">Made with ❤️ by Mansi (and some help of AI) for munchers like you</p>
+        </div>
+    </div>
+</footer>
+
+<% content_for :head do %>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    .font-cursive {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    /* Enhanced backdrop blur effects */
+    .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    
+    .backdrop-blur-xl {
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Enhanced shadows for depth */
+    .shadow-2xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Dancing utensils animation */
+    .dancing-utensils {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dancing-fork {
+        animation: dance 2s ease-in-out infinite;
+        transform-origin: center;
+    }
+    
+    @keyframes dance {
+        0%, 100% {
+            transform: rotate(0deg) scale(1);
+        }
+        25% {
+            transform: rotate(-10deg) scale(1.1);
+        }
+        50% {
+            transform: rotate(5deg) scale(1.05);
+        }
+        75% {
+            transform: rotate(-5deg) scale(1.1);
+        }
+    }
+    
+    /* Add a subtle bounce effect */
+    .dancing-utensils:hover .dancing-fork {
+        animation: bounce 0.6s ease-in-out;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        40% {
+            transform: translateY(-5px) scale(1.1);
+        }
+        60% {
+            transform: translateY(-3px) scale(1.05);
+        }
+    }
+    
+    /* Custom animations */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Gradient text animation */
+    .bg-gradient-to-r {
+        background-size: 200% 200%;
+        animation: gradient 3s ease infinite;
+    }
+    
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+</style>
+<% end %>
+
+<script>
+console.log("Reasype UI loaded - version 17.0 - GRANDMACORE PINK THEME")
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu')
+    menu.classList.toggle('hidden')
+}
+
+// Scroll to upload section
+function scrollToUpload() {
+    document.getElementById('uploadSection').scrollIntoView({ 
+        behavior: 'smooth' 
+    })
+}
+
+// Show how it works modal
+function showHowItWorks() {
+    showMessage('📖 How it works: Upload a photo → AI recognizes ingredients → Get personalized recipes!', 'success')
+}
+
+// Direct file upload handler
+function handleImageUpload(input) {
+    console.log("=== HANDLE IMAGE UPLOAD STARTED ===")
+    const file = input.files[0]
+    if (!file) {
+        console.log("No file selected")
+        return
+    }
+    
+    console.log("File selected:", file.name, "Size:", file.size, "Type:", file.type)
+    
+    // Show preview
+    showPreview(file)
+    
+    // Upload and analyze
+    uploadAndAnalyze(file)
+}
+
+function showPreview(file) {
+    console.log("Showing preview for file:", file.name)
+    const reader = new FileReader()
+    reader.onload = (e) => {
+        document.getElementById('previewDiv').innerHTML = `
+            <div class="text-center">
+                <img src="${e.target.result}" class="max-w-lg rounded-2xl shadow-2xl mx-auto">
+            </div>
+        `
+        console.log("Preview displayed successfully")
+    }
+    reader.readAsDataURL(file)
+}
+
+function uploadAndAnalyze(file) {
+    console.log("=== UPLOAD AND ANALYZE STARTED ===")
+    
+    // Show loading
+    showLoading()
+    
+    const formData = new FormData()
+    formData.append('ingredient_photo[image]', file)
+    
+    console.log("Sending request to /ingredient_photos")
+    console.log("CSRF Token:", document.querySelector('meta[name="csrf-token"]')?.content)
+    console.log("File being uploaded:", file.name, file.size, file.type)
+    
+    // Check if CSRF token exists
+    const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content
+    if (!csrfToken) {
+        console.error("❌ CSRF token not found!")
+        hideLoading()
+        showMessage('❌ Security token missing. Please refresh the page.', 'error')
+        return
+    }
+    
+    fetch('/ingredient_photos', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-Token': csrfToken
+        },
+        body: formData
+    })
+    .then(response => {
+        console.log("Response status:", response.status)
+        console.log("Response headers:", response.headers)
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`)
+        }
+        return response.json()
+    })
+    .then(data => {
+        console.log("Response data:", data)
+        hideLoading()
+        
+        if (data.success) {
+            console.log("✅ Upload successful!")
+            showMessage('✅ Image uploaded successfully!', 'success')
+            displayResults(data.ingredient_photo.recognized_ingredients)
+        } else {
+            console.error("❌ Upload failed:", data.errors)
+            showMessage('❌ Upload failed: ' + (data.errors || 'Unknown error'), 'error')
+        }
+    })
+    .catch(error => {
+        console.error("Upload error:", error)
+        console.error("Error details:", error.message)
+        hideLoading()
+        showMessage('❌ Upload failed: ' + error.message, 'error')
+    })
+}
+
+function showLoading() {
+    console.log("Showing loading")
+    document.getElementById('loadingDiv').classList.remove('hidden')
+}
+
+function hideLoading() {
+    console.log("Hiding loading")
+    document.getElementById('loadingDiv').classList.add('hidden')
+}
+
+function displayResults(ingredients) {
+    console.log("=== DISPLAY RESULTS STARTED ===")
+    console.log("Raw ingredients:", ingredients)
+    
+    const resultsDiv = document.getElementById('resultsDiv')
+    
+    if (!ingredients || ingredients.length === 0) {
+        resultsDiv.innerHTML = `
+            <div class="text-center">
+                <div class="bg-gradient-to-r from-red-100 to-red-200 rounded-2xl p-8 shadow-2xl border border-red-200/50">
+                    <i class="fas fa-exclamation-triangle text-red-600 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-red-800 mb-4 font-cursive">No Ingredients Detected</h3>
+                    <p class="text-red-700 font-cursive">We couldn't identify any ingredients in your image. Please try uploading a clearer photo of your ingredients.</p>
+                </div>
+            </div>
+        `
+        return
+    }
+    
+    // Display detected ingredients
+    let html = `
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 p-8 mb-8">
+            <h3 class="text-3xl font-bold text-gray-900 mb-6 font-cursive">
+                <i class="fas fa-check-circle text-green-600 mr-3"></i>
+                Detected Ingredients
+            </h3>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                ${ingredients.map(ingredient => {
+                    const emoji = getIngredientEmoji(ingredient)
+                    return `
+                        <div class="bg-white/70 backdrop-blur-sm rounded-xl p-4 text-center shadow-lg border border-white/30">
+                            <div class="text-3xl mb-2">${emoji}</div>
+                            <p class="font-semibold text-gray-800 font-cursive">${ingredient}</p>
+                        </div>
+                    `
+                }).join('')}
+            </div>
+            
+            <div class="text-center mt-8 space-x-4">
+                           <button onclick="generateRecipes('${ingredients.join(',')}')" 
+                   class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-black px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl font-cursive border-2 border-white/20">
+               <i class="fas fa-magic mr-3"></i>
+               Generate Recipes
+           </button>
+           <a href="/recipes" class="inline-block bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-black px-8 py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform hover:scale-105 shadow-2xl font-cursive border-2 border-white/20">
+               <i class="fas fa-plus mr-3"></i>
+               Add Your Recipe
+           </a>
+            </div>
+        </div>
+    `
+    
+    resultsDiv.innerHTML = html
+}
+
+function generateRecipes(ingredientsString) {
+    console.log("=== GENERATE RECIPES STARTED ===")
+    console.log("Ingredients string:", ingredientsString)
+    
+    const ingredients = ingredientsString.split(',').map(i => i.trim())
+    console.log("Parsed ingredients:", ingredients)
+    
+    // Show loading for recipe generation
+    const resultsDiv = document.getElementById('resultsDiv')
+    resultsDiv.innerHTML = `
+        <div class="text-center">
+            <div class="inline-flex items-center px-8 py-6 bg-gradient-to-r from-pink-100 to-rose-100 text-pink-800 rounded-2xl shadow-2xl border border-pink-200/50">
+                <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-pink-600 mr-4"></div>
+                <span class="font-medium text-lg font-cursive">Generating delicious recipes...</span>
+            </div>
+        </div>
+    `
+    
+    // Simulate recipe generation (in real app, this would call the backend)
+    setTimeout(() => {
+        const recipeService = new RecipeGeneratorService(ingredients)
+        const recipes = recipeService.generate_recipes()
+        displayGeneratedRecipes(recipes)
+    }, 2000)
+}
+
+function displayGeneratedRecipes(recipes) {
+    console.log("=== DISPLAY GENERATED RECIPES ===")
+    console.log("Recipes:", recipes)
+    
+    const resultsDiv = document.getElementById('resultsDiv')
+    
+    if (!recipes || recipes.length === 0) {
+        resultsDiv.innerHTML = `
+            <div class="text-center">
+                <div class="bg-gradient-to-r from-yellow-100 to-yellow-200 rounded-2xl p-8 shadow-2xl border border-yellow-200/50">
+                    <i class="fas fa-lightbulb text-yellow-600 text-4xl mb-4"></i>
+                    <h3 class="text-2xl font-bold text-yellow-800 mb-4 font-cursive">No Recipes Found</h3>
+                    <p class="text-yellow-700 font-cursive">We couldn't generate recipes with your current ingredients. Try adding more ingredients or different types of food.</p>
+                </div>
+            </div>
+        `
+        return
+    }
+    
+    let html = `
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 p-8">
+            <h3 class="text-3xl font-bold text-gray-900 mb-6 font-cursive">
+                <i class="fas fa-utensils text-pink-600 mr-3"></i>
+                Generated Recipes
+            </h3>
+    `
+    
+    recipes.forEach((recipe, index) => {
+        html += `
+            <div class="bg-white/95 backdrop-blur-xl rounded-3xl p-8 mb-8 shadow-2xl border border-white/30">
+                <div class="flex items-center justify-between mb-6">
+                    <h4 class="text-3xl font-bold text-gray-900 font-cursive">${recipe.title}</h4>
+                    <span class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-4 py-2 rounded-xl text-sm font-bold font-cursive">${recipe.difficulty}</span>
+                </div>
+                
+                <p class="text-gray-600 mb-8 text-lg italic font-cursive">${recipe.description}</p>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-8 text-center">
+                    <div class="bg-white/50 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-gray-500 text-sm mb-2 font-cursive">Prep Time</div>
+                        <div class="font-bold text-lg font-cursive">${recipe.prep_time} min</div>
+                    </div>
+                    <div class="bg-white/50 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-gray-500 text-sm mb-2 font-cursive">Cook Time</div>
+                        <div class="font-bold text-lg font-cursive">${recipe.cook_time} min</div>
+                    </div>
+                    <div class="bg-white/50 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-gray-500 text-sm mb-2 font-cursive">Servings</div>
+                        <div class="font-bold text-lg font-cursive">${recipe.servings}</div>
+                    </div>
+                    <div class="bg-white/50 backdrop-blur-sm rounded-xl p-4">
+                        <div class="text-gray-500 text-sm mb-2 font-cursive">Difficulty</div>
+                        <div class="font-bold text-lg font-cursive">${recipe.difficulty}</div>
+                    </div>
+                </div>
+                
+                <div class="mb-8">
+                    <h5 class="font-bold text-xl text-gray-900 mb-6 flex items-center font-cursive">
+                        <i class="fas fa-utensils mr-3 text-pink-600"></i>
+                        Ingredients
+                    </h5>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${recipe.ingredients.map(ing => 
+                            `<div class="bg-white/70 backdrop-blur-sm text-gray-700 px-6 py-4 rounded-xl text-lg font-cursive">
+                                <span class="font-bold">${ing.quantity} ${ing.unit}</span> ${ing.name}
+                            </div>`
+                        ).join('')}
+                    </div>
+                </div>
+                
+                <div>
+                    <h5 class="font-bold text-xl text-gray-900 mb-6 flex items-center font-cursive">
+                        <i class="fas fa-list-ol mr-3 text-pink-600"></i>
+                        Instructions
+                    </h5>
+                    <ol class="list-decimal list-inside space-y-4 text-gray-700 text-lg font-cursive">
+                        ${recipe.instructions.map(instruction => `<li class="pl-4">${instruction}</li>`).join('')}
+                    </ol>
+                </div>
+                
+                <div class="mt-8 flex gap-4">
+                    <button onclick="copyRecipe(${index})" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                        <i class="fas fa-copy mr-3"></i>Copy Recipe
+                    </button>
+                    <button onclick="saveRecipe(${index})" class="bg-gradient-to-r from-gray-600 to-gray-700 hover:from-gray-700 hover:to-gray-800 text-white px-6 py-3 rounded-xl font-bold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                        <i class="fas fa-save mr-3"></i>Save Recipe
+                    </button>
+                </div>
+            </div>
+        `
+    })
+    
+    html += '</div>'
+    resultsDiv.innerHTML = html
+}
+
+// Recipe Generator Service (JavaScript version for frontend)
+class RecipeGeneratorService {
+    constructor(ingredients) {
+        this.ingredients = ingredients.map(i => i.toLowerCase())
+        this.available_ingredients = this.ingredients.slice()
+    }
+
+    generate_recipes() {
+        const recipes = []
+        
+        if (this.can_make_pav_bhaji()) recipes.push(this.generate_pav_bhaji_recipe())
+        if (this.can_make_mashed_potatoes()) recipes.push(this.generate_mashed_potatoes_recipe())
+        if (this.can_make_pasta()) recipes.push(this.generate_pasta_recipe())
+        if (this.can_make_chicken()) recipes.push(this.generate_chicken_recipe())
+        if (this.can_make_breakfast()) recipes.push(this.generate_breakfast_recipe())
+        if (this.can_make_soup()) recipes.push(this.generate_soup_recipe())
+        if (this.can_make_salad()) recipes.push(this.generate_salad_recipe())
+        if (this.can_make_dessert()) recipes.push(this.generate_dessert_recipe())
+        
+        if (recipes.length === 0) {
+            recipes.push(this.generate_basic_recipe())
+        }
+        
+        return recipes
+    }
+
+    has_ingredient(ingredient) {
+        return this.available_ingredients.some(i => i.includes(ingredient))
+    }
+
+    can_make_pav_bhaji() {
+        return this.has_ingredient('potatoes') && (this.has_ingredient('pav bread') || this.has_ingredient('bread'))
+    }
+
+    can_make_mashed_potatoes() {
+        return this.has_ingredient('potatoes') && (this.has_ingredient('butter') || this.has_ingredient('milk'))
+    }
+
+    can_make_pasta() {
+        return this.has_ingredient('pasta') || this.has_ingredient('macaroni') || this.has_ingredient('spaghetti')
+    }
+
+    can_make_chicken() {
+        return this.has_ingredient('chicken')
+    }
+
+    can_make_breakfast() {
+        return this.has_ingredient('flour') || this.has_ingredient('eggs') || this.has_ingredient('milk')
+    }
+
+    can_make_soup() {
+        return this.has_ingredient('vegetables') || this.has_ingredient('broth') || this.has_ingredient('soup')
+    }
+
+    can_make_salad() {
+        return this.has_ingredient('lettuce') || this.has_ingredient('tomato') || this.has_ingredient('cucumber')
+    }
+
+    can_make_dessert() {
+        return this.has_ingredient('sugar') || this.has_ingredient('flour') || this.has_ingredient('chocolate')
+    }
+
+    generate_pav_bhaji_recipe() {
+        return {
+            title: "Pav Bhaji",
+            difficulty: "Medium",
+            prep_time: 20,
+            cook_time: 30,
+            servings: 4,
+            description: "A popular Indian street food with spiced mashed vegetables served with buttered bread rolls.",
+            ingredients: [
+                { quantity: "4", unit: "medium", name: "potatoes, boiled and mashed" },
+                { quantity: "2", unit: "medium", name: "tomatoes, finely chopped" },
+                { quantity: "1", unit: "large", name: "onion, finely chopped" },
+                { quantity: "1", unit: "medium", name: "bell pepper, finely chopped" },
+                { quantity: "8", unit: "pieces", name: "pav bread" },
+                { quantity: "3", unit: "tbsp", name: "butter" },
+                { quantity: "2", unit: "tsp", name: "pav bhaji masala" },
+                { quantity: "1", unit: "tsp", name: "red chili powder" },
+                { quantity: "to taste", unit: "", name: "salt" },
+                { quantity: "1", unit: "tbsp", name: "lemon juice" }
+            ],
+            instructions: [
+                "Heat butter in a large pan over medium heat",
+                "Add chopped onions and sauté until golden brown",
+                "Add chopped bell peppers and cook for 2-3 minutes",
+                "Add chopped tomatoes and cook until soft",
+                "Add pav bhaji masala, red chili powder, and salt",
+                "Add mashed potatoes and mix well",
+                "Cook for 5-7 minutes, stirring occasionally",
+                "Add lemon juice and mix well",
+                "Toast pav bread with butter until golden",
+                "Serve hot bhaji with buttered pav bread"
+            ]
+        }
+    }
+
+    generate_mashed_potatoes_recipe() {
+        return {
+            title: "Creamy Mashed Potatoes",
+            difficulty: "Easy",
+            prep_time: 15,
+            cook_time: 25,
+            servings: 4,
+            description: "Smooth and fluffy mashed potatoes with butter and milk - the perfect comfort food.",
+            ingredients: [
+                { quantity: "4", unit: "large", name: "potatoes, peeled and cubed" },
+                { quantity: "4", unit: "tbsp", name: "butter" },
+                { quantity: "1/2", unit: "cup", name: "milk" },
+                { quantity: "1", unit: "tsp", name: "salt" },
+                { quantity: "1/2", unit: "tsp", name: "black pepper" },
+                { quantity: "2", unit: "cloves", name: "garlic, minced (optional)" }
+            ],
+            instructions: [
+                "Peel and cube potatoes into 1-inch pieces",
+                "Place potatoes in a large pot and cover with cold water",
+                "Add 1 teaspoon salt to the water",
+                "Bring to a boil over high heat",
+                "Reduce heat to medium and simmer for 15-20 minutes until tender",
+                "Drain potatoes and return to the pot",
+                "Add butter, milk, salt, and pepper",
+                "Mash potatoes with a potato masher until smooth",
+                "If using garlic, add minced garlic and mix well",
+                "Serve hot with extra butter on top"
+            ]
+        }
+    }
+
+    generate_pasta_recipe() {
+        return {
+            title: "Creamy Pasta Delight",
+            difficulty: "Easy",
+            prep_time: 10,
+            cook_time: 20,
+            servings: 4,
+            description: "A simple and delicious pasta dish using your available ingredients.",
+            ingredients: [
+                { quantity: "1", unit: "lb", name: "pasta" },
+                { quantity: "2", unit: "tbsp", name: "olive oil" },
+                { quantity: "3", unit: "cloves", name: "garlic, minced" },
+                { quantity: "1/2", unit: "cup", name: "parmesan cheese" },
+                { quantity: "to taste", unit: "", name: "salt and pepper" },
+                { quantity: "1/4", unit: "cup", name: "fresh herbs (optional)" }
+            ],
+            instructions: [
+                "Bring a large pot of salted water to boil",
+                "Cook pasta according to package directions until al dente",
+                "While pasta cooks, heat olive oil in a large pan over medium heat",
+                "Add minced garlic and sauté for 1-2 minutes until fragrant",
+                "Drain pasta, reserving 1 cup of pasta water",
+                "Add pasta to the pan with garlic and oil",
+                "Add parmesan cheese and toss to combine",
+                "Add reserved pasta water as needed to create a creamy sauce",
+                "Season with salt and pepper to taste",
+                "Garnish with fresh herbs if available and serve immediately"
+            ]
+        }
+    }
+
+    generate_chicken_recipe() {
+        return {
+            title: "Simple Garlic Chicken",
+            difficulty: "Easy",
+            prep_time: 15,
+            cook_time: 25,
+            servings: 4,
+            description: "A flavorful chicken dish that's perfect for any night of the week.",
+            ingredients: [
+                { quantity: "4", unit: "pieces", name: "chicken breasts" },
+                { quantity: "3", unit: "tbsp", name: "olive oil" },
+                { quantity: "4", unit: "cloves", name: "garlic, minced" },
+                { quantity: "1", unit: "tsp", name: "dried herbs" },
+                { quantity: "to taste", unit: "", name: "salt and pepper" },
+                { quantity: "1/2", unit: "cup", name: "chicken broth (optional)" }
+            ],
+            instructions: [
+                "Season chicken breasts with salt and pepper on both sides",
+                "Heat olive oil in a large skillet over medium-high heat",
+                "Add chicken breasts and cook for 6-8 minutes per side until golden brown",
+                "Reduce heat to medium and add minced garlic",
+                "Cook garlic for 1-2 minutes until fragrant",
+                "Add dried herbs and stir to combine",
+                "If using broth, add it to the pan and simmer for 2-3 minutes",
+                "Cook chicken until internal temperature reaches 165°F",
+                "Let chicken rest for 5 minutes before serving",
+                "Serve with your favorite side dish"
+            ]
+        }
+    }
+
+    generate_breakfast_recipe() {
+        return {
+            title: "Fluffy Pancakes",
+            difficulty: "Easy",
+            prep_time: 10,
+            cook_time: 15,
+            servings: 4,
+            description: "Light and fluffy pancakes perfect for a weekend breakfast.",
+            ingredients: [
+                { quantity: "2", unit: "cups", name: "all-purpose flour" },
+                { quantity: "2", unit: "tbsp", name: "sugar" },
+                { quantity: "2", unit: "tsp", name: "baking powder" },
+                { quantity: "1/2", unit: "tsp", name: "salt" },
+                { quantity: "2", unit: "", name: "large eggs" },
+                { quantity: "1 3/4", unit: "cups", name: "milk" },
+                { quantity: "1/4", unit: "cup", name: "melted butter" },
+                { quantity: "1", unit: "tsp", name: "vanilla extract" }
+            ],
+            instructions: [
+                "In a large bowl, whisk together flour, sugar, baking powder, and salt",
+                "In a separate bowl, beat eggs, then add milk, melted butter, and vanilla",
+                "Pour wet ingredients into dry ingredients and stir until just combined",
+                "Let batter rest for 5 minutes",
+                "Heat a griddle or large skillet over medium heat",
+                "Lightly grease the cooking surface",
+                "Pour 1/4 cup batter for each pancake",
+                "Cook until bubbles form on the surface, about 2-3 minutes",
+                "Flip and cook the other side until golden brown",
+                "Serve hot with butter and maple syrup"
+            ]
+        }
+    }
+
+    generate_soup_recipe() {
+        return {
+            title: "Hearty Vegetable Soup",
+            difficulty: "Easy",
+            prep_time: 15,
+            cook_time: 45,
+            servings: 6,
+            description: "A comforting soup that's perfect for using up vegetables.",
+            ingredients: [
+                { quantity: "2", unit: "tbsp", name: "olive oil" },
+                { quantity: "1", unit: "large", name: "onion, diced" },
+                { quantity: "3", unit: "cloves", name: "garlic, minced" },
+                { quantity: "4", unit: "cups", name: "vegetables, chopped" },
+                { quantity: "6", unit: "cups", name: "vegetable broth" },
+                { quantity: "1", unit: "tsp", name: "dried herbs" },
+                { quantity: "to taste", unit: "", name: "salt and pepper" }
+            ],
+            instructions: [
+                "Heat olive oil in a large pot over medium heat",
+                "Add diced onion and cook until softened, about 5 minutes",
+                "Add minced garlic and cook for 1 minute until fragrant",
+                "Add chopped vegetables and cook for 5 minutes",
+                "Pour in vegetable broth and bring to a boil",
+                "Reduce heat and simmer for 30-40 minutes until vegetables are tender",
+                "Season with herbs, salt, and pepper to taste",
+                "Let soup cool slightly before serving",
+                "Garnish with fresh herbs if available"
+            ]
+        }
+    }
+
+    generate_salad_recipe() {
+        return {
+            title: "Fresh Garden Salad",
+            difficulty: "Easy",
+            prep_time: 15,
+            cook_time: 0,
+            servings: 4,
+            description: "A refreshing salad that's perfect for any meal.",
+            ingredients: [
+                { quantity: "4", unit: "cups", name: "mixed greens" },
+                { quantity: "1", unit: "large", name: "tomato, sliced" },
+                { quantity: "1", unit: "medium", name: "cucumber, sliced" },
+                { quantity: "1/4", unit: "cup", name: "olive oil" },
+                { quantity: "2", unit: "tbsp", name: "vinegar" },
+                { quantity: "to taste", unit: "", name: "salt and pepper" }
+            ],
+            instructions: [
+                "Wash and dry all vegetables thoroughly",
+                "Tear or chop greens into bite-sized pieces",
+                "Slice tomato and cucumber into thin slices",
+                "In a small bowl, whisk together olive oil, vinegar, salt, and pepper",
+                "In a large bowl, combine greens, tomato, and cucumber",
+                "Drizzle with dressing and toss gently to combine",
+                "Serve immediately for best freshness",
+                "Add additional toppings like cheese or nuts if desired"
+            ]
+        }
+    }
+
+    generate_dessert_recipe() {
+        return {
+            title: "Simple Vanilla Cake",
+            difficulty: "Medium",
+            prep_time: 20,
+            cook_time: 30,
+            servings: 8,
+            description: "A classic vanilla cake that's perfect for any celebration.",
+            ingredients: [
+                { quantity: "2", unit: "cups", name: "all-purpose flour" },
+                { quantity: "1 1/2", unit: "cups", name: "sugar" },
+                { quantity: "1/2", unit: "cup", name: "butter, softened" },
+                { quantity: "3", unit: "", name: "large eggs" },
+                { quantity: "1", unit: "cup", name: "milk" },
+                { quantity: "2", unit: "tsp", name: "vanilla extract" },
+                { quantity: "2", unit: "tsp", name: "baking powder" },
+                { quantity: "1/2", unit: "tsp", name: "salt" }
+            ],
+            instructions: [
+                "Preheat oven to 350°F and grease a 9-inch cake pan",
+                "In a large bowl, cream butter and sugar until light and fluffy",
+                "Add eggs one at a time, beating well after each addition",
+                "Mix in vanilla extract",
+                "In a separate bowl, whisk together flour, baking powder, and salt",
+                "Alternately add flour mixture and milk to butter mixture",
+                "Pour batter into prepared pan and smooth the top",
+                "Bake for 25-30 minutes until a toothpick comes out clean",
+                "Let cake cool in pan for 10 minutes, then transfer to wire rack",
+                "Frost with your favorite frosting or serve plain"
+            ]
+        }
+    }
+
+    generate_basic_recipe() {
+        return {
+            title: "Simple Stir-Fry",
+            difficulty: "Easy",
+            prep_time: 15,
+            cook_time: 10,
+            servings: 4,
+            description: "A quick and easy stir-fry using your available ingredients.",
+            ingredients: [
+                { quantity: "2", unit: "tbsp", name: "oil" },
+                { quantity: "2", unit: "cloves", name: "garlic, minced" },
+                { quantity: "1", unit: "medium", name: "onion, sliced" },
+                { quantity: "4", unit: "cups", name: "mixed vegetables" },
+                { quantity: "2", unit: "tbsp", name: "soy sauce" },
+                { quantity: "to taste", unit: "", name: "salt and pepper" }
+            ],
+            instructions: [
+                "Heat oil in a large wok or skillet over high heat",
+                "Add minced garlic and cook for 30 seconds until fragrant",
+                "Add sliced onion and cook for 2 minutes until softened",
+                "Add vegetables and stir-fry for 5-7 minutes until crisp-tender",
+                "Add soy sauce and season with salt and pepper",
+                "Continue cooking for 1-2 minutes until vegetables are coated",
+                "Serve hot over rice or noodles if available",
+                "Garnish with fresh herbs if desired"
+            ]
+        }
+    }
+}
+
+function showMessage(message, type) {
+    console.log("Showing message:", message, "Type:", type)
+    const messageDiv = document.createElement('div')
+    messageDiv.className = `fixed top-6 right-6 px-8 py-6 rounded-2xl shadow-2xl z-50 text-white font-bold text-lg ${
+        type === 'success' ? 'bg-gradient-to-r from-green-500 to-green-600' : 'bg-gradient-to-r from-red-500 to-red-600'
+    } backdrop-blur-xl font-cursive`
+    messageDiv.innerHTML = `
+        <div class="flex items-center">
+            <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'} mr-4 text-2xl"></i>
+            ${message}
+        </div>
+    `
+    document.body.appendChild(messageDiv)
+    
+    setTimeout(() => {
+        messageDiv.remove()
+    }, 4000)
+}
+
+function copyRecipe(recipeIndex) {
+    showMessage('📋 Recipe copied to clipboard!', 'success')
+}
+
+function saveRecipe(recipeIndex) {
+    showMessage('💾 Recipe saved to your collection!', 'success')
+}
+
+// Test functions
+function testJavaScript() {
+    console.log("JavaScript is working!")
+    showMessage('✅ JavaScript is working!', 'success')
+    
+    const resultsDiv = document.getElementById('resultsDiv')
+    if (resultsDiv) {
+        console.log("Results div found:", resultsDiv)
+        resultsDiv.innerHTML = `
+            <div class="bg-gradient-to-br from-green-100 to-green-200 backdrop-blur-xl text-green-800 p-8 rounded-3xl shadow-2xl border border-green-200/50">
+                <h3 class="font-bold text-2xl mb-4 font-cursive">🧪 JavaScript Test</h3>
+                <p class="mb-4 text-lg font-cursive">JavaScript is working! Results div found.</p>
+                <p class="text-sm font-cursive">Time: ${new Date().toLocaleTimeString()}</p>
+            </div>
+        `
+    } else {
+        console.error("Results div not found!")
+        showMessage('❌ Results div not found!', 'error')
+    }
+}
+
+function testUpload() {
+    console.log("=== TEST UPLOAD STARTED ===")
+    
+    // First test if the server is reachable
+    fetch('/ingredient_photos/test', {
+        method: 'POST',
+        headers: {
+            'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.content || '',
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => {
+        console.log("Test endpoint response status:", response.status)
+        return response.json()
+    })
+    .then(data => {
+        console.log("Test endpoint data:", data)
+        showMessage('✅ Server is responding! Test endpoint works.', 'success')
+    })
+    .catch(error => {
+        console.error("Test endpoint error:", error)
+        showMessage('❌ Server test failed: ' + error.message, 'error')
+    })
+}
+
+function getIngredientEmoji(ingredient) {
+    const ingredientIcons = {
+        'vegetables': '🥬',
+        'onions': '🧅',
+        'garlic': '🧄',
+        'oil': '🫒',
+        'spices': '🌶️',
+        'tomato': '🍅',
+        'tomatoes': '🍅',
+        'cheese': '🧀',
+        'basil': '🌿',
+        'potato': '🥔',
+        'potatoes': '🥔',
+        'butter': '🧈',
+        'bread': '🍞',
+        'rice': '🍚',
+        'chicken': '🍗',
+        'fish': '🐟',
+        'egg': '🥚',
+        'eggs': '🥚',
+        'herb': '🌿',
+        'sauce': '🥫',
+        'beef': '🥩',
+        'lettuce': '🥬',
+        'onion': '🧅',
+        'bun': '🍞',
+        'mayo': '🥫',
+        'flour': '🌾',
+        'milk': '🥛',
+        'sugar': '🍯',
+        'baking powder': '🧂',
+        'protein': '🥩',
+        'grains': '🌾',
+        'seasonings': '🧂',
+        'salt': '🧂',
+        'pepper': '🌶️',
+        'bell peppers': '🫑',
+        'pav bread': '🍞',
+        'almond': '🥜',
+        'almonds': '🥜',
+        'chocolate': '🍫',
+        'vanilla': '🌿',
+        'cream': '🥛',
+        'strawberry': '🍓',
+        'strawberries': '🍓',
+        'raspberry': '🫐',
+        'raspberries': '🫐',
+        'macaron': '🍪',
+        'macarons': '🍪',
+        'ice cream': '🍦',
+        'icecream': '🍦',
+        'pasta': '🍝',
+        'alfredo': '🍝',
+        'parmesan': '🧀',
+        'heavy cream': '🥛',
+        'egg whites': '🥚',
+        'almond flour': '🌾'
+    }
+    
+    const lowerIngredient = ingredient.toLowerCase()
+    for (const [key, emoji] of Object.entries(ingredientIcons)) {
+        if (lowerIngredient.includes(key)) {
+            return emoji
+        }
+    }
+    
+    // Default emoji for unknown ingredients
+    return '🥘'
+}
+
+// Drag and Drop functionality
+function handleDragOver(event) {
+    event.preventDefault()
+    event.currentTarget.style.transform = 'scale(1.05)'
+    event.currentTarget.style.borderColor = '#ec4899'
+}
+
+function handleDragLeave(event) {
+    event.preventDefault()
+    event.currentTarget.style.transform = 'scale(1)'
+    event.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+}
+
+function handleDrop(event) {
+    event.preventDefault()
+    event.currentTarget.style.transform = 'scale(1)'
+    event.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.2)'
+    
+    const files = event.dataTransfer.files
+    if (files.length > 0) {
+        const file = files[0]
+        if (file.type.startsWith('image/')) {
+            // Create a new FileList-like object
+            const dataTransfer = new DataTransfer()
+            dataTransfer.items.add(file)
+            
+            // Set the file to the input
+            const input = document.getElementById('imageInput')
+            input.files = dataTransfer.files
+            
+            // Trigger the upload
+            handleImageUpload(input)
+            
+            showMessage('📸 Image dropped successfully!', 'success')
+        } else {
+            showMessage('❌ Please drop an image file', 'error')
+        }
+    }
+}
+
+// Scroll to upload section
+function scrollToUpload() {
+    const uploadSection = document.querySelector('.bg-gradient-to-br.from-pink-50.to-rose-50')
+    if (uploadSection) {
+        uploadSection.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        })
+    }
+}
+
+// Test if everything is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded - Reasype UI ready - GRANDMACORE PINK THEME")
+    
+    // Add hover effects to feature cards
+    const featureCards = document.querySelectorAll('.group')
+    featureCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-8px) scale(1.02)'
+        })
+        card.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0) scale(1)'
+        })
+    })
+})
+</script> 

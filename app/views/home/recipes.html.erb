@@ -1,0 +1,482 @@
+<!-- Beautiful Backdrop Background with Kitchen Images -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-pink-900/40 via-rose-900/40 to-red-900/40"></div>
+    <div class="absolute inset-0 opacity-20">
+        <img src="/IMG_1947.JPG" alt="Kitchen backdrop" class="w-full h-full object-cover">
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/35"></div>
+</div>
+
+<!-- Navigation -->
+<nav class="relative z-50 bg-white/15 backdrop-blur-md border-b border-white/30 sticky top-0">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center py-4">
+            <div class="flex items-center">
+                <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mr-3 shadow-lg">
+                    <div class="dancing-utensils">
+                        <i class="fas fa-utensils text-white dancing-fork"></i>
+                    </div>
+                </div>
+                <h1 class="text-3xl font-bold text-white drop-shadow-2xl font-cursive">Reasype</h1>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="/" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Home</a>
+                <a href="/about" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">About</a>
+                <a href="/contact" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Contact</a>
+                <a href="/recipes" class="text-white font-medium transition-colors duration-200 font-cursive drop-shadow-lg">Recipes</a>
+            </div>
+            <div class="md:hidden">
+                <button onclick="toggleMobileMenu()" class="text-white hover:text-pink-200 transition-colors">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden pb-4">
+            <a href="/" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Home</a>
+            <a href="/about" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">About</a>
+            <a href="/contact" class="block py-2 text-white/80 hover:text-white font-cursive drop-shadow-lg">Contact</a>
+            <a href="/recipes" class="block py-2 text-white font-medium font-cursive drop-shadow-lg">Recipes</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<div class="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8">
+    <div class="max-w-5xl mx-auto text-center">
+        <div class="mb-8">
+            <div class="inline-flex items-center px-6 py-3 bg-white/20 backdrop-blur-md rounded-full border border-white/30 mb-8">
+                <i class="fas fa-book-open text-yellow-300 mr-2"></i>
+                <span class="text-white font-medium font-cursive drop-shadow-lg">Quick & Easy Recipes</span>
+            </div>
+        </div>
+        
+        <h1 class="text-6xl md:text-7xl font-bold text-white mb-8 drop-shadow-2xl leading-tight font-cursive">
+            Quick
+            <span class="text-white font-cursive drop-shadow-lg">
+                Recipes
+            </span>
+        </h1>
+        
+        <p class="text-xl md:text-2xl text-white mb-12 max-w-3xl mx-auto leading-relaxed font-cursive drop-shadow-lg">
+            Discover our collection of quick and delicious recipes perfect for busy home cooks. 
+            From traditional European dishes to modern favorites.
+        </p>
+    </div>
+</div>
+
+<!-- Main Content -->
+<div class="relative py-20 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-6xl mx-auto">
+        <!-- Recipe Categories -->
+        <div class="text-center mb-16">
+            <h2 class="text-4xl font-bold text-white mb-6 font-cursive drop-shadow-lg">Recipe Categories</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button onclick="filterRecipes('all')" class="bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    All Recipes
+                </button>
+                <button onclick="filterRecipes('quick')" class="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    Quick Meals
+                </button>
+                <button onclick="filterRecipes('traditional')" class="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    Traditional
+                </button>
+                <button onclick="filterRecipes('dessert')" class="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    Desserts
+                </button>
+                <button onclick="filterRecipes('custom')" class="bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                    Your Recipes
+                </button>
+            </div>
+        </div>
+
+        <!-- Recipes Grid -->
+        <div id="recipesGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Add Your Own Recipe Card -->
+            <div class="recipe-card bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 overflow-hidden hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2 border-2 border-dashed border-pink-300" data-category="custom">
+                <div class="relative h-48 bg-gradient-to-br from-pink-100 to-rose-100 flex items-center justify-center">
+                    <div class="text-center">
+                        <i class="fas fa-plus-circle text-6xl text-pink-500 mb-4 drop-shadow-lg"></i>
+                        <p class="text-pink-600 font-bold text-lg font-cursive">Add Your Recipe</p>
+                    </div>
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 font-cursive">Share Your Recipe</h3>
+                        <span class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-xl text-sm font-bold font-cursive">Custom</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 font-cursive">Have a favorite recipe you'd like to share? Add it to our collection!</p>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-heart mr-2"></i>
+                            <span>Your Creation</span>
+                        </div>
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-star mr-2"></i>
+                            <span>Community</span>
+                        </div>
+                    </div>
+                    <button onclick="openAddRecipeForm()" class="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-black py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20">
+                        <i class="fas fa-plus mr-2"></i>Add Your Recipe
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Recipe 1: Creamy Macaroni and Cheese -->
+            <div class="recipe-card bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 overflow-hidden hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2" data-category="traditional">
+                <div class="relative h-48 bg-gradient-to-br from-yellow-100 to-orange-100 flex items-center justify-center">
+                    <i class="fas fa-cheese text-6xl text-orange-600 drop-shadow-lg"></i>
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 font-cursive">Creamy Macaroni and Cheese</h3>
+                        <span class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-xl text-sm font-bold font-cursive">Traditional</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 font-cursive">A comforting classic with creamy cheese sauce and perfectly cooked pasta.</p>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>1h 40m</span>
+                        </div>
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-users mr-2"></i>
+                            <span>6-8 servings</span>
+                        </div>
+                    </div>
+                    <a href="https://cooking.nytimes.com/recipes/1015825-creamy-macaroni-and-cheese" target="_blank" class="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20 inline-block text-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>View on NYT Cooking
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recipe 2: Carrot Loaf Cake With Tangy Lemon Glaze -->
+            <div class="recipe-card bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 overflow-hidden hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2" data-category="dessert">
+                <div class="relative h-48 bg-gradient-to-br from-orange-100 to-yellow-100 flex items-center justify-center">
+                    <i class="fas fa-birthday-cake text-6xl text-orange-500 drop-shadow-lg"></i>
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 font-cursive">Carrot Loaf Cake With Tangy Lemon Glaze</h3>
+                        <span class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-xl text-sm font-bold font-cursive">Dessert</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 font-cursive">A moist carrot cake with a zesty lemon glaze that's perfect for any occasion.</p>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>1h 15m</span>
+                        </div>
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-users mr-2"></i>
+                            <span>8-10 servings</span>
+                        </div>
+                    </div>
+                    <a href="https://cooking.nytimes.com/recipes/1021263-carrot-loaf-cake-with-tangy-lemon-glaze" target="_blank" class="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20 inline-block text-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>View on NYT Cooking
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Recipe 3: Butternut Squash Soup -->
+            <div class="recipe-card bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 overflow-hidden hover:shadow-3xl transition-all duration-500 transform hover:-translate-y-2" data-category="quick">
+                <div class="relative h-48 bg-gradient-to-br from-orange-100 to-red-100 flex items-center justify-center">
+                    <i class="fas fa-carrot text-6xl text-orange-600 drop-shadow-lg"></i>
+                </div>
+                <div class="p-8">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900 font-cursive">Butternut Squash Soup</h3>
+                        <span class="bg-gradient-to-r from-pink-500 to-rose-500 text-white px-3 py-1 rounded-xl text-sm font-bold font-cursive">Quick Meals</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 font-cursive">A creamy, comforting soup perfect for chilly days and cozy evenings.</p>
+                    <div class="flex items-center justify-between mb-6">
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-clock mr-2"></i>
+                            <span>45m</span>
+                        </div>
+                        <div class="flex items-center text-gray-500 font-cursive">
+                            <i class="fas fa-users mr-2"></i>
+                            <span>4-6 servings</span>
+                        </div>
+                    </div>
+                    <a href="https://cooking.nytimes.com/recipes/320-butternut-squash-soup?algo=identity&fellback=true&imp_id=7419133032912061&req_id=62753402578425&surface=cooking-search-web&variant=0_relevance_reranking" target="_blank" class="w-full bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20 inline-block text-center">
+                        <i class="fas fa-external-link-alt mr-2"></i>View on NYT Cooking
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="relative bg-black/80 backdrop-blur-xl text-white py-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid md:grid-cols-4 gap-8">
+            <div>
+                <div class="flex items-center mb-6">
+                    <div class="w-10 h-10 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center mr-4 shadow-lg">
+                        <i class="fas fa-utensils text-white"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-cursive">Reasype</h3>
+                </div>
+                <p class="text-gray-300 text-lg leading-relaxed font-cursive">AI-powered recipe optimization for modern cooking enthusiasts.</p>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-6 font-cursive">Features</h4>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Ingredient Recognition</li>
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Recipe Generation</li>
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Dietary Preferences</li>
+                    <li class="flex items-center font-cursive"><i class="fas fa-check text-green-400 mr-3"></i>Smart Suggestions</li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-6 font-cursive">Support</h4>
+                <ul class="space-y-3 text-gray-300">
+                    <li class="font-cursive"><a href="/help" class="hover:text-pink-400 transition-colors duration-200">Help Center</a></li>
+                    <li class="font-cursive"><a href="/contact" class="hover:text-pink-400 transition-colors duration-200">Contact Us</a></li>
+                    <li class="font-cursive"><a href="/privacy" class="hover:text-pink-400 transition-colors duration-200">Privacy Policy</a></li>
+                    <li class="font-cursive"><a href="/terms" class="hover:text-pink-400 transition-colors duration-200">Terms of Service</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="font-bold text-xl mb-6 font-cursive">Connect</h4>
+                <div class="flex space-x-4 mb-6">
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-facebook text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" class="w-12 h-12 bg-white/10 backdrop-blur-sm rounded-xl flex items-center justify-center text-white hover:bg-white/20 transition-all duration-200">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+                <p class="text-gray-400 font-cursive">Join our community of food lovers</p>
+            </div>
+        </div>
+        
+        <div class="border-t border-white/20 mt-12 pt-8 text-center text-gray-400">
+            <p class="font-cursive">Made with ❤️ by Mansi (and some help of AI) for munchers like you</p>
+        </div>
+    </div>
+</footer>
+
+<% content_for :head do %>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    .font-cursive {
+        font-family: 'Dancing Script', cursive;
+    }
+    
+    /* Enhanced backdrop blur effects */
+    .backdrop-blur-md {
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+    }
+    
+    .backdrop-blur-xl {
+        backdrop-filter: blur(24px);
+        -webkit-backdrop-filter: blur(24px);
+    }
+    
+    /* Smooth scrolling */
+    html {
+        scroll-behavior: smooth;
+    }
+    
+    /* Enhanced shadows for depth */
+    .shadow-2xl {
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+    
+    .shadow-3xl {
+        box-shadow: 0 35px 60px -12px rgba(0, 0, 0, 0.3);
+    }
+    
+    /* Dancing utensils animation */
+    .dancing-utensils {
+        position: relative;
+        display: inline-block;
+    }
+    
+    .dancing-fork {
+        animation: dance 2s ease-in-out infinite;
+        transform-origin: center;
+    }
+    
+    @keyframes dance {
+        0%, 100% {
+            transform: rotate(0deg) scale(1);
+        }
+        25% {
+            transform: rotate(-10deg) scale(1.1);
+        }
+        50% {
+            transform: rotate(5deg) scale(1.05);
+        }
+        75% {
+            transform: rotate(-5deg) scale(1.1);
+        }
+    }
+    
+    /* Add a subtle bounce effect */
+    .dancing-utensils:hover .dancing-fork {
+        animation: bounce 0.6s ease-in-out;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {
+            transform: translateY(0) scale(1);
+        }
+        40% {
+            transform: translateY(-5px) scale(1.1);
+        }
+        60% {
+            transform: translateY(-3px) scale(1.05);
+        }
+    }
+    
+    /* Custom animations */
+    @keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+    }
+    
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+    }
+    
+    /* Gradient text animation */
+    .bg-gradient-to-r {
+        background-size: 200% 200%;
+        animation: gradient 3s ease infinite;
+    }
+    
+    @keyframes gradient {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+    }
+    
+    /* Custom opacity classes for backdrop images */
+    .opacity-10 {
+        opacity: 0.1;
+    }
+    
+    .opacity-15 {
+        opacity: 0.15;
+    }
+    
+    .opacity-20 {
+        opacity: 0.2;
+    }
+    
+    .opacity-25 {
+        opacity: 0.25;
+    }
+</style>
+<% end %>
+
+<script>
+console.log("Reasype Recipes page loaded - version 2.0 - NYT COOKING LINKS")
+
+// Mobile menu toggle
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobileMenu')
+    menu.classList.toggle('hidden')
+}
+
+function filterRecipes(category) {
+    const recipeCards = document.querySelectorAll('.recipe-card');
+    const buttons = document.querySelectorAll('[onclick^="filterRecipes"]');
+    
+    recipeCards.forEach(card => {
+        if (category === 'all' || card.getAttribute('data-category') === category) {
+            card.style.display = 'block';
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    buttons.forEach(button => {
+        if (button.getAttribute('onclick').includes(category)) {
+            button.className = 'bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20';
+        } else {
+            button.className = 'bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 px-6 py-3 rounded-2xl font-semibold transition-all duration-300 transform hover:scale-105 font-cursive shadow-2xl border-2 border-white/20';
+        }
+    });
+}
+
+function openAddRecipeForm() {
+    // Create a simple modal for adding recipes
+    const modal = document.createElement('div');
+    modal.className = 'fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50';
+    modal.innerHTML = `
+        <div class="bg-gradient-to-br from-pink-50 to-rose-50 backdrop-blur-xl rounded-3xl shadow-2xl border border-pink-200/50 p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-2xl font-bold text-gray-900 font-cursive">Add Your Recipe</h3>
+                <button onclick="closeAddRecipeForm()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="space-y-4">
+                <div>
+                    <label class="block text-gray-700 font-cursive mb-2">Recipe Name</label>
+                    <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-cursive" placeholder="Enter recipe name">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-cursive mb-2">Category</label>
+                    <select class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-cursive">
+                        <option>Quick Meals</option>
+                        <option>Traditional</option>
+                        <option>Desserts</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-cursive mb-2">Description</label>
+                    <textarea class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-pink-500 focus:border-transparent font-cursive" rows="3" placeholder="Describe your recipe"></textarea>
+                </div>
+                <div class="flex space-x-4 pt-4">
+                    <button type="button" onclick="closeAddRecipeForm()" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white py-3 rounded-2xl font-semibold transition-all duration-300 font-cursive shadow-lg">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-pink-600 to-rose-600 hover:from-pink-700 hover:to-rose-700 text-white py-3 rounded-2xl font-semibold transition-all duration-300 font-cursive shadow-lg">
+                        <i class="fas fa-plus mr-2"></i>Add Recipe
+                    </button>
+                </div>
+            </form>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function closeAddRecipeForm() {
+    const modal = document.querySelector('.fixed.inset-0');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// Close modal when clicking outside
+document.addEventListener('click', function(e) {
+    if (e.target.classList.contains('fixed') && e.target.classList.contains('inset-0')) {
+        closeAddRecipeForm();
+    }
+});
+
+// Test if everything is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM loaded - Reasype Recipes page ready - NYT COOKING LINKS")
+})
+</script> 
