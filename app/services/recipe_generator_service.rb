@@ -1,4 +1,4 @@
-require 'openai'
+require "openai"
 
 class RecipeGeneratorService
   def initialize(ingredients)
@@ -8,7 +8,7 @@ class RecipeGeneratorService
 
   def generate_recipes
     recipes = []
-    
+
     # Generate multiple recipe options based on available ingredients
     recipes << generate_pav_bhaji_recipe if can_make_pav_bhaji?
     recipes << generate_mashed_potatoes_recipe if can_make_mashed_potatoes?
@@ -18,47 +18,47 @@ class RecipeGeneratorService
     recipes << generate_soup_recipe if can_make_soup?
     recipes << generate_salad_recipe if can_make_salad?
     recipes << generate_dessert_recipe if can_make_dessert?
-    
+
     # If no specific recipes match, generate a basic recipe
     if recipes.empty?
       recipes << generate_basic_recipe
     end
-    
+
     recipes.compact
   end
 
   private
 
   def can_make_pav_bhaji?
-    has_ingredient?('potatoes') && (has_ingredient?('pav bread') || has_ingredient?('bread'))
+    has_ingredient?("potatoes") && (has_ingredient?("pav bread") || has_ingredient?("bread"))
   end
 
   def can_make_mashed_potatoes?
-    has_ingredient?('potatoes') && (has_ingredient?('butter') || has_ingredient?('milk'))
+    has_ingredient?("potatoes") && (has_ingredient?("butter") || has_ingredient?("milk"))
   end
 
   def can_make_pasta?
-    has_ingredient?('pasta') || has_ingredient?('macaroni') || has_ingredient?('spaghetti')
+    has_ingredient?("pasta") || has_ingredient?("macaroni") || has_ingredient?("spaghetti")
   end
 
   def can_make_chicken?
-    has_ingredient?('chicken')
+    has_ingredient?("chicken")
   end
 
   def can_make_breakfast?
-    has_ingredient?('flour') || has_ingredient?('eggs') || has_ingredient?('milk')
+    has_ingredient?("flour") || has_ingredient?("eggs") || has_ingredient?("milk")
   end
 
   def can_make_soup?
-    has_ingredient?('vegetables') || has_ingredient?('broth') || has_ingredient?('soup')
+    has_ingredient?("vegetables") || has_ingredient?("broth") || has_ingredient?("soup")
   end
 
   def can_make_salad?
-    has_ingredient?('lettuce') || has_ingredient?('tomato') || has_ingredient?('cucumber')
+    has_ingredient?("lettuce") || has_ingredient?("tomato") || has_ingredient?("cucumber")
   end
 
   def can_make_dessert?
-    has_ingredient?('sugar') || has_ingredient?('flour') || has_ingredient?('chocolate')
+    has_ingredient?("sugar") || has_ingredient?("flour") || has_ingredient?("chocolate")
   end
 
   def has_ingredient?(ingredient)
@@ -347,4 +347,4 @@ class RecipeGeneratorService
       ]
     }
   end
-end 
+end

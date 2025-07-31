@@ -1,11 +1,11 @@
 class RecipesController < ApplicationController
   def generate
     ingredients = params[:ingredients] || []
-    
+
     # Use the RecipeGeneratorService to generate recipes
     service = RecipeGeneratorService.new(ingredients)
     recipes = service.generate_recipes
-    
+
     render json: {
       success: true,
       recipes: recipes
@@ -17,17 +17,17 @@ class RecipesController < ApplicationController
       error: "Failed to generate recipes"
     }
   end
-  
+
   def show
     # For now, just render a simple response
     render json: { message: "Recipe details would be shown here" }
   end
-  
+
   def save
     # For now, just return success
-    render json: { 
-      success: true, 
-      message: "Recipe saved successfully" 
+    render json: {
+      success: true,
+      message: "Recipe saved successfully"
     }
   end
-end 
+end
