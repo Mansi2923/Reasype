@@ -45,7 +45,7 @@ gem "image_processing", "~> 1.2"
 gem "google-cloud-vision"
 
 # AI and external API gems
-gem "redis", "~> 4.0"
+gem "redis", "~> 5.4"
 gem "openai"
 gem "httparty"
 gem "sidekiq"
