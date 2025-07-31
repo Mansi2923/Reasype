@@ -66,6 +66,7 @@ pickle-email-*.html
 
 # Ignore application configuration
 /config/application.yml
+/config/*.json
 
 # Ignore environment files
 .env
