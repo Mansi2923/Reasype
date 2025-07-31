@@ -10,6 +10,12 @@ namespace :db do
     puts "Skipping database prepare - no database needed"
   end
 
+  # Add the colon version that CI expects
+  desc "Skip database prepare (colon version)"
+  task "test:prepare" => :environment do
+    puts "Skipping database prepare - no database needed"
+  end
+
   desc "Skip database load config"
   task load_config: :environment do
     puts "Skipping database load config - no database needed"
