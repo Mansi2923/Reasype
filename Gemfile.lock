@@ -531,6 +531,7 @@ DEPENDENCIES
   openai
   pg (~> 1.1)
   propshaft
+  psych (~> 5.0)
   puma (>= 5.0)
   rails (~> 8.0.2)
   redis (~> 4.0)
