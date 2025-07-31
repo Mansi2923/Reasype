@@ -3,7 +3,7 @@
   "builds": [
     {
       "src": "config.ru",
-      "use": "@vercel/ruby"
+      "use": "@vercel/ruby@3.3.0"
     }
   ],
   "routes": [
@@ -17,6 +17,8 @@
     }
   ],
   "env": {
-    "RAILS_ENV": "production"
+    "RAILS_ENV": "production",
+    "BUNDLE_DEPLOYMENT": "1",
+    "BUNDLE_WITHOUT": "development:test"
   }
 } 
