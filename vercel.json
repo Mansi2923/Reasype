@@ -1,23 +1,22 @@
 {
-  "buildCommand": "bundle install && bundle exec rails assets:precompile",
-  "outputDirectory": "public",
-  "framework": "ruby",
-  "installCommand": "bundle install",
-  "devCommand": "bundle exec rails server",
+  "version": 2,
   "builds": [
     {
-      "src": "public/**",
-      "use": "@vercel/static"
+      "src": "config.ru",
+      "use": "@vercel/ruby"
     }
   ],
   "routes": [
     {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
     {
       "src": "/(.*)",
-      "dest": "/index.html"
+      "dest": "/$1"
     }
-  ]
+  ],
+  "env": {
+    "RAILS_ENV": "production"
+  }
 } 
