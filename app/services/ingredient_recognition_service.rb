@@ -8,6 +8,12 @@ class IngredientRecognitionService
   
   def analyze
     begin
+      # Check if environment variables are available
+      unless ENV['GOOGLE_CLOUD_PROJECT_ID'] && ENV['GOOGLE_CLOUD_PRIVATE_KEY']
+        Rails.logger.warn "Google Cloud credentials not found, using filename-based detection"
+        return detect_from_filename
+      end
+      
       # Configure Google Cloud Vision with environment variables
       vision = Google::Cloud::Vision.new(
         project_id: ENV['GOOGLE_CLOUD_PROJECT_ID'],
@@ -56,6 +62,7 @@ class IngredientRecognitionService
       return ingredients.presence || detect_from_filename
     rescue => e
       Rails.logger.error("Vision API error: #{e.message}")
+      Rails.logger.info "Falling back to filename-based detection"
       # Fallback to filename-based detection
       detect_from_filename
     end
