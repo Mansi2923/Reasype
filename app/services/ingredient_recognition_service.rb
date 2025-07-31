@@ -8,28 +8,16 @@ class IngredientRecognitionService
   
   def analyze
     begin
-      # Check if environment variables are available
-      unless ENV['GOOGLE_CLOUD_PROJECT_ID'] && ENV['GOOGLE_CLOUD_PRIVATE_KEY']
-        Rails.logger.warn "Google Cloud credentials not found, using filename-based detection"
+      # Check if Vision API credentials are available
+      unless vision_api_available?
+        Rails.logger.warn "Vision API not available, using filename-based detection"
         return detect_from_filename
       end
       
-      # Configure Google Cloud Vision with environment variables
+      # Configure Google Cloud Vision
       vision = Google::Cloud::Vision.new(
-        project_id: ENV['GOOGLE_CLOUD_PROJECT_ID'],
-        credentials: {
-          type: "service_account",
-          project_id: ENV['GOOGLE_CLOUD_PROJECT_ID'],
-          private_key_id: ENV['GOOGLE_CLOUD_PRIVATE_KEY_ID'],
-          private_key: ENV['GOOGLE_CLOUD_PRIVATE_KEY']&.gsub('\n', "\n"),
-          client_email: ENV['GOOGLE_CLOUD_CLIENT_EMAIL'],
-          client_id: ENV['GOOGLE_CLOUD_CLIENT_ID'],
-          auth_uri: "https://accounts.google.com/o/oauth2/auth",
-          token_uri: "https://oauth2.googleapis.com/token",
-          auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
-          client_x509_cert_url: ENV['GOOGLE_CLOUD_CLIENT_X509_CERT_URL'],
-          universe_domain: "googleapis.com"
-        }
+        project_id: get_vision_config('project_id'),
+        credentials: build_vision_credentials
       )
       
       image_annotator = vision.image_annotator
@@ -327,5 +315,46 @@ class IngredientRecognitionService
     end
     
     context_ingredients.uniq
+  end
+
+  private
+
+  def vision_api_available?
+    get_vision_config('project_id').present? && get_vision_config('private_key').present?
+  end
+
+  def get_vision_config(key)
+    case key
+    when 'project_id'
+      ENV['GOOGLE_CLOUD_PROJECT_ID']
+    when 'private_key'
+      ENV['GOOGLE_CLOUD_PRIVATE_KEY']
+    when 'private_key_id'
+      ENV['GOOGLE_CLOUD_PRIVATE_KEY_ID']
+    when 'client_email'
+      ENV['GOOGLE_CLOUD_CLIENT_EMAIL']
+    when 'client_id'
+      ENV['GOOGLE_CLOUD_CLIENT_ID']
+    when 'client_x509_cert_url'
+      ENV['GOOGLE_CLOUD_CLIENT_X509_CERT_URL']
+    else
+      nil
+    end
+  end
+
+  def build_vision_credentials
+    {
+      type: "service_account",
+      project_id: get_vision_config('project_id'),
+      private_key_id: get_vision_config('private_key_id'),
+      private_key: get_vision_config('private_key')&.gsub('\n', "\n"),
+      client_email: get_vision_config('client_email'),
+      client_id: get_vision_config('client_id'),
+      auth_uri: "https://accounts.google.com/o/oauth2/auth",
+      token_uri: "https://oauth2.googleapis.com/token",
+      auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
+      client_x509_cert_url: get_vision_config('client_x509_cert_url'),
+      universe_domain: "googleapis.com"
+    }
   end
 end 
