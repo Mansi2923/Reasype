@@ -15,8 +15,9 @@ class IngredientPhotosController < ApplicationController
 
       Rails.logger.info "File info - Original: #{original_filename}, Temp: #{temp_path}"
 
-      # For testing, use filename-based detection instead of Vision API
-      recognized_ingredients = detect_ingredients_from_filename(original_filename)
+      # Use Vision API for ingredient recognition - THIS IS THE CORE FUNCTIONALITY
+      recognition_service = IngredientRecognitionService.new(temp_path, original_filename)
+      recognized_ingredients = recognition_service.analyze
 
       Rails.logger.info "Detected ingredients: #{recognized_ingredients}"
 
