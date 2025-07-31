@@ -100,7 +100,6 @@ coverage/
 vendor/bundle/
 
 # Ignore rbenv
-.ruby-version
 .ruby-gemset
 
 # Ignore node modules if any
