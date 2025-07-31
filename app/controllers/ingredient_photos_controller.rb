@@ -1,70 +1,40 @@
 class IngredientPhotosController < ApplicationController
-  before_action :set_ingredient_photo, only: [ :show, :destroy ]
   skip_before_action :verify_authenticity_token, only: [ :create ]
-
-  def index
-    @ingredient_photos = current_user.ingredient_photos.order(created_at: :desc)
-  end
 
   def create
     Rails.logger.info "=== INGREDIENT PHOTOS CREATE STARTED ==="
     Rails.logger.info "Params: #{params.inspect}"
 
     begin
-      # Create the record with image_data
-      @ingredient_photo = current_user.ingredient_photos.build(
-        user: current_user,
-        analysis_status: "processing"
-      )
+      # Get the original filename before it gets renamed
+      original_filename = params[:ingredient_photo][:image].original_filename
 
-      Rails.logger.info "Ingredient photo built: #{@ingredient_photo.inspect}"
+      # Save the uploaded file temporarily for analysis
+      temp_file = params[:ingredient_photo][:image].tempfile
+      temp_path = temp_file.path
 
-      if @ingredient_photo.save
-        Rails.logger.info "Ingredient photo saved successfully"
+      Rails.logger.info "File info - Original: #{original_filename}, Temp: #{temp_path}"
 
-        # Get the original filename before it gets renamed
-        original_filename = params[:ingredient_photo][:image].original_filename
+      # For testing, use filename-based detection instead of Vision API
+      recognized_ingredients = detect_ingredients_from_filename(original_filename)
 
-        # Save the uploaded file temporarily for analysis
-        temp_file = params[:ingredient_photo][:image].tempfile
-        temp_path = temp_file.path
+      Rails.logger.info "Detected ingredients: #{recognized_ingredients}"
 
-        Rails.logger.info "File info - Original: #{original_filename}, Temp: #{temp_path}"
+      # Generate recipes based on detected ingredients
+      recipe_service = RecipeGeneratorService.new(recognized_ingredients)
+      generated_recipes = recipe_service.generate_recipes
 
-        # Store the image data (for now, just store the filename)
-        @ingredient_photo.update(image_data: original_filename)
+      Rails.logger.info "Generated recipes: #{generated_recipes}"
 
-        # For testing, use filename-based detection instead of Vision API
-        recognized_ingredients = detect_ingredients_from_filename(original_filename)
-
-        Rails.logger.info "Detected ingredients: #{recognized_ingredients}"
-
-        # Generate recipes based on detected ingredients
-        recipe_service = RecipeGeneratorService.new(recognized_ingredients)
-        generated_recipes = recipe_service.generate_recipes
-
-        Rails.logger.info "Generated recipes: #{generated_recipes}"
-
-        @ingredient_photo.update(
+      render json: {
+        success: true,
+        ingredient_photo: {
+          id: SecureRandom.uuid,
           recognized_ingredients: recognized_ingredients,
           analysis_status: "completed"
-        )
-
-        Rails.logger.info "Final ingredient photo: #{@ingredient_photo.inspect}"
-
-        render json: {
-          success: true,
-          ingredient_photo: {
-            id: @ingredient_photo.id,
-            recognized_ingredients: recognized_ingredients,
-            analysis_status: "completed"
-          },
-          recipes: generated_recipes
-        }
-      else
-        Rails.logger.error "Failed to save ingredient photo: #{@ingredient_photo.errors.full_messages}"
-        render json: { success: false, errors: @ingredient_photo.errors.full_messages }
-      end
+        },
+        recipes: generated_recipes
+      }
     rescue => e
       Rails.logger.error "Upload error: #{e.message}"
       Rails.logger.error e.backtrace.join("\n")
@@ -76,16 +46,11 @@ class IngredientPhotosController < ApplicationController
     render json: {
       success: true,
       ingredient_photo: {
-        id: @ingredient_photo.id,
-        recognized_ingredients: @ingredient_photo.recognized_ingredients,
-        analysis_status: @ingredient_photo.analysis_status
+        id: params[:id],
+        recognized_ingredients: [],
+        analysis_status: "completed"
       }
     }
-  end
-
-  def destroy
-    @ingredient_photo.destroy
-    redirect_to ingredient_photos_path, notice: "Photo deleted successfully."
   end
 
   # Test endpoint
@@ -94,28 +59,6 @@ class IngredientPhotosController < ApplicationController
   end
 
   private
-
-  def ingredient_photo_params
-    # We don't need to permit image since we're not saving it to the model
-    params.require(:ingredient_photo).permit()
-  end
-
-  def set_ingredient_photo
-    @ingredient_photo = current_user.ingredient_photos.find(params[:id])
-  end
-
-  def current_user
-    # Create a user if none exists, or return the first user
-    user = User.first
-    if user.nil?
-      user = User.create!(
-        email: "demo@reasype.com",
-        name: "Demo User"
-      )
-      Rails.logger.info "Created demo user: #{user.id}"
-    end
-    user
-  end
 
   def detect_ingredients_from_filename(filename)
     filename = filename.downcase
