@@ -149,8 +149,11 @@ bundle exec rails test test/services/recipe_generator_service_test.rb
 
 ## 🚀 Deployment
 
+### Render Deployment
+This application is deployed on **Render** for production hosting.
+
 ### Production Setup
-1. Set up production environment variables
+1. Set up production environment variables on Render
 2. Configure Redis for production
 3. Set up SSL for secure connections
 4. Configure image storage (AWS S3 recommended)
